@@ -1,19 +1,22 @@
 'use strict';
 
-const body = document.querySelector('body');
-const logo = document.querySelector('.logo');
-
 const successMessage = `<div class="message">Promise was resolved!</div>`;
 const errorMessage = `<div class="message error-message">Promise was rejected!</div>`;
 
-const successHandler = (message) => {
+const successHandler = () => {
+  const body = document.querySelector('body');
+
   body.insertAdjacentHTML('beforeend', successMessage);
 };
-const errorHandler = (message) => {
+const errorHandler = () => {
+  const body = document.querySelector('body');
+
   body.insertAdjacentHTML('beforeend', errorMessage);
 };
 
 const promise1 = new Promise((resolve) => {
+  const logo = document.querySelector('.logo');
+
   logo.addEventListener('click', () => {
     resolve('Promise was resolved!');
   });
