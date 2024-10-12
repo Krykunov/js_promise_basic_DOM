@@ -14,18 +14,29 @@ const errorHandler = () => {
   body.insertAdjacentHTML('beforeend', errorMessage);
 };
 
-const promise1 = new Promise((resolve) => {
+const promise1 = new Promise((resolve, reject) => {
   const logo = document.querySelector('.logo');
 
+  const timeoutId = setTimeout(() => {
+    reject(new Error('No clicks registered'));
+  }, 5000);
+
   logo.addEventListener('click', () => {
+    clearTimeout(timeoutId);
     resolve('Promise was resolved!');
   });
 });
 
 const promise2 = new Promise((resolve, reject) => {
+  const logo = document.querySelector('.logo');
+
   setTimeout(() => {
     reject(new Error('Promise was rejected!'));
   }, 3000);
+
+  logo.addEventListener('click', () => {
+    resolve('Promise2 was resolved before timeout!');
+  });
 });
 
 promise1.then(successHandler).catch(errorHandler);
